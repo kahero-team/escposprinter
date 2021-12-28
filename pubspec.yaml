@@ -3,7 +3,7 @@ description: The library allows to print receipts using an ESC/POS printer throu
 version: 0.0.1
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
+  sdk: ">=2.15.0 <3.0.0"
   flutter: ">=2.5.0"
 
 dependencies:
