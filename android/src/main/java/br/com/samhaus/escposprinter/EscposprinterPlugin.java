@@ -10,7 +10,7 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.plugin.common.FlutterPlugin.FlutterPluginBinding.BinaryMessenger;
 
 import br.com.samhaus.escposprinter.adapter.USBPrinterAdapter;
 
@@ -27,9 +27,9 @@ public class EscposprinterPlugin implements FlutterPlugin, MethodCallHandler, Ac
   private USBPrinterAdapter adapter;
   private ActivityPluginBinding activityPluginBinding;
 
-  public static void registerWith(Registrar registrar) {
+  public static void registerWith(BinaryMessenger registrar) {
     EscposprinterPlugin instance = new EscposprinterPlugin();
-    instance.createChannel(registrar.messenger());
+    instance.createChannel(registrar.getBinaryMessenger());
   }
 
   private void createChannel(BinaryMessenger binaryMessenger) {
