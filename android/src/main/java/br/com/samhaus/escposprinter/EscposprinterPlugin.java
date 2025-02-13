@@ -10,7 +10,7 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.FlutterPlugin.FlutterPluginBinding.BinaryMessenger;
+import io.flutter.plugin.common.PluginRegistry;
 
 import br.com.samhaus.escposprinter.adapter.USBPrinterAdapter;
 
@@ -26,11 +26,6 @@ public class EscposprinterPlugin implements FlutterPlugin, MethodCallHandler, Ac
   private MethodChannel channel;
   private USBPrinterAdapter adapter;
   private ActivityPluginBinding activityPluginBinding;
-
-  public static void registerWith(BinaryMessenger registrar) {
-    EscposprinterPlugin instance = new EscposprinterPlugin();
-    instance.createChannel(registrar.getBinaryMessenger());
-  }
 
   private void createChannel(BinaryMessenger binaryMessenger) {
     channel = new MethodChannel(binaryMessenger, "escposprinter");
@@ -54,7 +49,7 @@ public class EscposprinterPlugin implements FlutterPlugin, MethodCallHandler, Ac
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     if (call.method.equals("getUsbDeviceList")) {
       getUsbDeviceList(result);
-    } else if (call.method.equals("connectPrinter")) { 
+    } else if (call.method.equals("connectPrinter")) {
       Integer vendorId = call.argument("vendorId");
       Integer productId = call.argument("productId");
       connectPrinter(vendorId, productId, result);
